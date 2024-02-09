@@ -1,0 +1,143 @@
+<html>
+<head>
+    <!-- PyScript: https://github.com/pyscript/pyscript/releases -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+    <!-- Bootstrap: https://getbootstrap.com -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- local Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <py-config>
+        packages = []
+        [[fetch]]
+        files = [ "main.py" , "geodashga/board.py", "geodashga/geo.py"]
+    </py-config>
+</head>
+<body>
+    <!-- Healthy Spacing -->
+    <br>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col logo-flex-col">
+                    <img py-click="window.location.href = 'https://jtexpo.github.io'" src="../assets/images/jtexpo.png"
+                        alt="" class="logo-img">
+                    <a href="https://jtexpo.github.io" class="display-3 logo-main-text">JTexpo</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="display-4 text-center">
+                        <a href="https://www.youtube.com/@JTexpo" target="_blank" class="logo-sub-text">
+                            Content To Tr<span style="color: #F3AF56;">AI</span>n Your Brain
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Healthy Spacing -->
+    <br>
+    <br>
+    <!-- Graph RNN -->
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-success" py-click="start()">Start</button>
+                </div>
+                <div class="col-sm-2">
+                    <div class="h4 info-body" style="text-align: center;" id="page-index">
+                        Page : 1/3
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="h4 info-body" style="text-align: center;" id="gen-index">
+                        Gen : 0
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-danger" py-click="clear_board()">Clear</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <canvas id="geo-game" class="mx-auto" width="800" height="400" style="align-content: center;"></canvas>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-secondary" py-click="update_start_index(-SPACING)"><</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-dark" py-click="toggle_mode(DRAW_MODE_KEY)">Draw</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-danger" py-click="toggle_mode(SPIKES_MODE_KEY)">Spike</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-light" py-click="toggle_mode(ERASE_MODE_KEY)">Erase</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-secondary" py-click="update_start_index(SPACING)">></button>
+                </div>
+
+            </div>
+            
+            <!-- Healthy Spacing -->
+            <br>
+            <br>
+            <br>
+            <!-- Explination -->
+            <!-- How to use this app -->
+            <div class="row">
+                <div class="h2 info-header">How to use this app</div>
+            </div>
+            <div class="row">
+                <div class="h4 info-body">
+                    Upon entering the page, you'll encounter a filled out GeoDash board!
+                    You have the option to add or remove from the board, or entirely clear the premade map. <br><br>
+                    If you wish to customize the GeoDash board, utilize the five buttons beneath the puzzle labeled: Draw, Erase, add spikes, and navigate left or right on the 3 available pages (note, if you want to have more pages. Feel free to pull the GitHub code, and modify the board's width).
+                    These buttons allow you to place tiles strategically to make the algorithm have a harder or easier puzzle to solve. <br><br>
+                    Keep in mind that the starting point is fixed, and will always be the 0 0 (top left corner) on page one.
+                    Once satisfied with your GeoDash board, use the 'Start' button to start the AI!
+                    When you are finished, use the 'Clear' button to wipe the slate clean and remove all tiles from the map! <br><br>
+                </div>
+            </div>
+            <!-- What is a RNN -->
+            <div class="row">
+                <div class="h2 info-header">What is a Genetic Algorithm?</div>
+            </div>
+            <div class="row">
+                <div class="h4 info-body">
+                    Genetic Algorithms (GAs) are powerful optimization techniques inspired by the process of natural selection.
+                    Similar to how organisms evolve and adapt to their environment, GAs iteratively refine a population of potential solutions to find the most optimal outcome. 
+                    Each solution, undergoes evaluation based on a fitness function to be selected to produce offspring through crossover and mutation. <br><br>
+                    This process drives gradually improving solutions over successive generations.
+                    Unlike brute-force methods, GAs explore complex solution spaces and handle non-linear, multi-modal objective functions. <br><br>
+                    GAs are widely applicable across various domains, including engineering, finance, and biology, where traditional optimization methods may struggle.
+                    By mimicking the principles of natural selection, GAs offer a versatile and effective approach to solving challenging optimization problems, ensuring adaptability and scalability in tackling real-world scenarios.
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Healthy Spacing -->
+    <br>
+    <br>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="h4 footer-rights">&copy; 2024 Justin Tyler Esposito. All rights Reserved.</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <py-script src="./main.py"></py-script>
+</body>
+</html>
